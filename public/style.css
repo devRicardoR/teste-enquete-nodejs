@@ -1,0 +1,24 @@
+.status {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.status.nao-iniciada {
+    background-color: #FFF3CD;
+    color: #856404;
+}
+
+.status.encerrada {
+    background-color: #F8D7DA;
+    color: #721C24;
+}
+
+.info-enquete {
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}

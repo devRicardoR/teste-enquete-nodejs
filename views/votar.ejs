@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= enquete.titulo %> - Sistema de Votação</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1><%= enquete.titulo %></h1>
+        
+        <!-- Exibe período e status -->
+        <div class="info-enquete">
+            <p>
+                <strong>Período:</strong> 
+                <%= inicioFormatado %> até <%= fimFormatado %>
+            </p>
+            <% if (!enquete.ativa) { %>
+                <p class="status <%= new Date() < new Date(enquete.inicio) ? 'nao-iniciada' : 'encerrada' %>">
+                    <%= new Date() < new Date(enquete.inicio) ? 'Enquete não iniciada' : 'Enquete encerrada' %>
+                </p>
+            <% } %>
+        </div>
+
+        <!-- Formulário de votação -->
+        <form 
+            action="/votar/<%= enquete.id %>" 
+            method="POST" 
+            class="enquete-form" 
+            <%= !enquete.ativa && 'disabled' %>
+        >
+            <div class="opcoes-container">
+                <% opcoes.forEach(opcao => { %>
+                    <label class="opcao-item">
+                        <input 
+                            type="radio" 
+                            name="opcao" 
+                            value="<%= opcao.id %>" 
+                            required
+                            <%= !enquete.ativa && 'disabled' %>
+                        >
+                        <span class="opcao-texto">
+                            <%= opcao.texto %> 
+                            <span 
+                                class="votos" 
+                                data-opcao-id="<%= opcao.id %>"
+                            >
+                                (Votos: <%= opcao.votos %>)
+                            </span>
+                        </span>
+                    </label>
+                <% }) %>
+            </div>
+
+            <% if (enquete.ativa) { %>
+                <button type="submit" class="btn-votar">Confirmar Voto</button>
+            <% } %>
+        </form>
+    </div>
+
+    <!-- Socket.IO para atualização em tempo real -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        
+        socket.on('atualizarVotos', (data) => {
+            if (data.enqueteId === '<%= enquete.id %>') {
+                data.opcoes.forEach(opcao => {
+                    const elemento = document.querySelector(`[data-opcao-id="${opcao.id}"]`);
+                    if (elemento) {
+                        elemento.textContent = `(Votos: ${opcao.votos})`;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

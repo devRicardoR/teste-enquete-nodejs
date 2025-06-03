@@ -1,0 +1,10 @@
+<h1>Enquetes</h1>
+<a href="/nova">Nova Enquete</a>
+<ul>
+    <% enquetes.forEach(enquete => { %>
+        <li>
+            <%= enquete.titulo %> - 
+            <a href="/votar/<%= enquete.id %>">Votar</a>
+        </li>
+    <% }) %>
+</ul>
