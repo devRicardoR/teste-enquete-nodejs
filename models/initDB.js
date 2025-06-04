@@ -1,6 +1,6 @@
 const db = require('../database');
 
-// SQLs usados para criar as tabelas (só para referência)
+
 const SQL_ENQUETES = `
     CREATE TABLE enquetes (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -20,7 +20,6 @@ const SQL_OPCOES = `
     )
 `;
 
-// Não precisa executar automaticamente (só para consulta)
 console.log('Estrutura do banco:');
 console.log(SQL_ENQUETES);
 console.log(SQL_OPCOES);

@@ -1,10 +1,25 @@
-<h1>Enquetes</h1>
-<a href="/nova">Nova Enquete</a>
-<ul>
-    <% enquetes.forEach(enquete => { %>
-        <li>
-            <%= enquete.titulo %> - 
-            <a href="/votar/<%= enquete.id %>">Votar</a>
-        </li>
-    <% }) %>
-</ul>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Enquetes</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1 class="titulo">Enquetes</h1>
+    <a href="/nova" class="botao">Nova Enquete</a>
+
+    <ul class="lista-enquetes">
+        <% enquetes.forEach(enquete => { %>
+            <li>
+                <span><%= enquete.titulo %></span>
+                <a href="/votar/<%= enquete.id %>" class="botao">Votar</a>
+                <a href="/enquetes/<%= enquete.id %>/editar" class="botao">Editar</a>
+                <form action="/enquetes/<%= enquete.id %>/deletar" method="POST" style="display:inline;">
+                    <button type="submit" class="botao" onclick="return confirm('Tem certeza?')">Deletar</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>

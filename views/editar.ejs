@@ -1,0 +1,14 @@
+<h1>Editar Enquete</h1>
+
+<form action="/enquetes/<%= enquete.id %>/atualizar" method="POST">
+    <label for="titulo">Título:</label><br>
+    <input type="text" id="titulo" name="titulo" value="<%= enquete.titulo %>" required><br><br>
+
+    <label for="inicio">Data de Início:</label><br>
+    <input type="datetime-local" id="inicio" name="inicio" value="<%= enquete.inicio %>" required><br><br>
+
+    <label for="fim">Data de Fim:</label><br>
+    <input type="datetime-local" id="fim" name="fim" value="<%= enquete.fim %>" required><br><br>
+
+    <button type="submit">Atualizar Enquete</button>
+</form>
