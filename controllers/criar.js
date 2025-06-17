@@ -14,8 +14,8 @@ function criarEnquete(req, res) {
         opcoes = [opcoes];
     }
 
-    if (!titulo || !inicio || !fim || !opcoes || opcoes.length < 3 || opcoes.length > 10) {
-        res.status(400).send('Preencha todos os campos e inclua entre 3 e 10 opções');
+    if (!titulo || !inicio || !fim || !opcoes || opcoes.length < 3) {
+        res.status(400).send('Preencha todos os campos e inclua 3 opções');
         return;
     }
 

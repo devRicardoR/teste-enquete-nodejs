@@ -22,7 +22,7 @@ function deletarEnquete(req, res) {
                 return;
             }
 
-            res.send('Enquete deletada com sucesso');
+            res.redirect('/');
         });
     });
 }
